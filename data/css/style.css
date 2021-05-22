@@ -1,0 +1,125 @@
+.bg-gradient{
+    /* background: linear-gradient(to right, rgba(241,231,103,1) 0%, rgba(254,182,69,1) 100%); */
+    background: #6309FB;
+    background: linear-gradient(to right, #6309FB 0%,  #EB664B 100%);
+}
+
+.bg-request{
+    background: linear-gradient(270deg, #94ff00, #0acac3);
+    background-size: 400% 400%;
+
+    -webkit-animation: AnimationName 11s ease infinite;
+    -moz-animation: AnimationName 11s ease infinite;
+    animation: AnimationName 11s ease infinite;
+}
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 11%}
+    50%{background-position:100% 90%}
+    100%{background-position:0% 11%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 11%}
+    50%{background-position:100% 90%}
+    100%{background-position:0% 11%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 11%}
+    50%{background-position:100% 90%}
+    100%{background-position:0% 11%}
+}
+
+.navbar-brand{
+    position: absolute;
+    left: 20px;
+}
+
+@media (min-width: 800px) {
+    .width-40 {
+        width: 40%;
+        min-width: 480px; 
+    }
+}   
+
+@media (max-width: 767px) {
+    .navbar-brand {
+        display: none;
+    }
+}  
+
+.mt-2 {
+    margin-top: 2% !important;
+}
+
+label{
+    font-size: 70%;
+}
+
+
+ul.navbar-nav li.nav-item {
+    margin-top: -.5rem;
+    margin-bottom: -.5rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+} 
+
+.nav-item:hover {
+    background: #f3f3f3;
+}
+.nav-item.active {
+    background: #efefef;
+} 
+
+/* .bootstrap-select{
+    display: block !important;
+    width: 100% !important;
+} */
+
+.dropdown-toggle{
+    display: block;
+    background: white;
+    border: 1px #ced4da solid;
+}
+
+/*  Ancho ventana modal  */
+@media (min-width: 576px){
+    .modal-dialog {
+        max-width: 80% !important;
+    }
+}
+
+#deviceInfoList{
+    overflow: auto;
+    max-height: 600px;
+}
+
+#deviceInfoList > li:nth-of-type(odd) {
+    background-color: #f9f9f9 ;
+}
+.list-group li:first-child { border-top: none; } /* Quita el borde supeior del primer elemento*/
+
+.list-group-item-action:hover{
+    background-color:  rgb(199, 199, 199) !important;
+    color: black;
+    /* outline: 1px rgb(48, 138, 255) solid !important; */
+}
+
+
+.dot {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+.dot.on{
+    background-color: rgb(57, 197, 44);    
+    box-shadow: 0px 0px 4px #16e216;
+    border: 1px solid #4fb760;
+}
+
+.dot.off {
+    background-color: rgb(209, 25, 40);
+    box-shadow: 0px 0px 4px #ef1527;
+    border: 1px solid #b71d2a;
+}

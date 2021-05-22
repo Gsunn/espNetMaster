@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document ESP 32 Setting</title>
+  <!-- <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="css/bootstrap4-toggle.min.css" /> -->
+
+  <link rel="stylesheet" href="css/unity.css" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    .hide {
+      display: none;
+    }
+
+    .swPos {
+      float: right;
+      margin-top: -34px;
+    }
+  </style>
+</head>
+
+<body class="bg-gradient">
+  <nav class="navbar navbar-light navbar-expand-md bg-light justify-content-center">
+    <a href="#" target="_blank" class="navbar-brand mr-0">
+      <img class="" src="" alt="" /> United Developers
+    </a>
+    <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#collapsingNavbar2">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="collapsingNavbar2">
+      <ul class="navbar-nav nav-fill mx-auto text-center">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#setup">Network Setup</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#comunications">Comunications</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#tools">Tools</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#info">Info</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="setup" class="container tab-pane active">
+      <br />
+      <div class="container card card-body bg-light mt-3 width-40">
+        <h2 class="text-center">Master Network Setup</h2>
+        <form action="/getFormSetup" class="needs-validation" method="POST">
+          <hr />
+
+          <div class="form-group">
+            <label for="apList">AP List:</label>
+            <select id="apList" name="apList" class="selectpicker show-tick form-control" data-live-search="true"
+              title="Choose one of the following...">
+              <!-- <option data-tokens="ketchup mustard">Wait scanning</option> -->
+              <!-- <option data-tokens="mustard">Burger, Shake and a Smile</option>
+                                <option data-tokens="frosting">Sugar, Spice and all things nice</option> -->
+            </select>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-8">
+              <label for="apPass">AP Password:</label>
+              <input type="password" class="form-control" id="apPass" name="apPass" placeholder="Enter Password"
+                required />
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="channel">Channel:</label>
+              <input type="number" class="form-control" id="channel" name="channel" value="%CHANNEL%" required readonly />
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+          </div>
+
+          <hr />
+
+          <div class="form-group row">
+            <div class="col-md-6">
+              <label for="ssid">SSID ESP NOW:</label>
+              <input type="text" class="form-control" id="ssid" placeholder="Enter SSID" name="ssid"
+                value="%SSID_ESP_NOW%" required />
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="pwd">Password ESP NOW:</label>
+              <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" required />
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+          </div>
+
+          <hr />
+
+          <button type="submit" class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0">
+            <i class="fas fa-paper-plane"></i> Submit
+          </button>
+        </form>
+      </div>
+    </div>
+    <!--END / Setup
+
+      <!-- Comunications -->
+    <div id="comunications" class="container tab-pane fade">
+      <br />
+      <div class="container card card-body bg-light mt-2 mb-5 width-40">
+        <h2 class="text-center">Comunications</h2>
+        <form action="/getFormComunications" class="needs-validation" method="POST">
+          <hr />
+          <div class="">
+            <h6>Websockets</h6>
+            <div class="swPos">
+              <input id="wsSwitch" name="wsSwitch" type="checkbox" data-toggle="toggle" data-width="50" data-size="xs"/>
+              <!-- checked -->
+            </div>
+          </div>
+
+          <div class="ws-setup hide">
+            <div class="form-group">
+              <label for="websocket">IP or Name:</label>
+              <input type="text" class="form-control" id="websocket" value="%WEBSOCKET%" placeholder="Enter Websocket"
+                name="websocket" required="false" disabled />
+              <!--  pattern="^[a-fA-F0-9:]{17}|[a-fA-F0-9]{12}$"-->
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-8">
+                <label for="uri">Uri:</label>
+                <input type="text" class="form-control" id="uri" placeholder="Enter uri" name="uri" value="%WS_URI%"
+                  required="false" disabled />
+                <!-- pattern="[/]{1}[a-zA-Z]{2,}" -->
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">
+                  Please fill out this field.
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label for="port">Port:</label>
+                <input type="number" class="form-control" id="port" placeholder="Enter port" name="port"
+                  value="%WS_PORT%" required="false" disabled />
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">
+                  Please fill out this field.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+
+          <div>
+            <h6>MQTT</h6>
+            <div class="swPos">
+              <input id="mqttSwitch" name="mqttSwitch" type="checkbox" data-toggle="toggle" data-width="50"
+                data-size="xs" />
+            </div>
+          </div>
+
+          <div class="mqtt-setup hide">
+            <div class="form-group row">
+              <div class="col-md-8">
+                <label for="mqtt_server">Server:</label>
+                <input type="text" class="form-control" id="mqtt_server" placeholder="Enter Server" name="mqtt_server"
+                  value="%MQTT_SERVER%" required />
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">
+                  Please fill out this field.
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label for="mqtt_server_port">Port:</label>
+                <input type="number" class="form-control" id="mqtt_server_port" placeholder="Enter port"
+                  name="mqtt_server_port" value="%MQTT_PORT%" required />
+                <!-- pattern="[/]{1}[a-zA-Z]{2,}" -->
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">
+                  Please fill out this field.
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label for="mqtt_username">User name:</label>
+                <input type="text" class="form-control" id="mqtt_username" placeholder="Enter User name"
+                  name="mqtt_username" value="%MQTT_USER%" required />
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">
+                  Please fill out this field.
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="mqtt_password">Password:</label>
+                <input type="password" class="form-control" id="mqtt_password" placeholder="Enter Password"
+                  name="mqtt_password" required />
+                <!-- pattern="[/]{1}[a-zA-Z]{2,}" -->
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">
+                  Please fill out this field.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+
+          <button id="btnSubmit" type="submit"
+            class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0">
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- END / Comunications -->
+
+    <!-- tools -->
+    <div id="tools" class="container tab-pane fade">
+      <br />
+      <div class="container card card-body bg-light mt-2 width-40">
+        <h2 class="text-center">Device Tools</h2>
+        <hr />
+        <div class="form-group">
+          <!-- <a href="/topology"> -->
+          <button id="btnTopology" type="button" class="btn btn-primary btn-block">
+            <span class="icon-tree"></span> Topology
+          </button>
+          <!-- </a> -->
+        </div>
+        <div class="form-group">
+          <!-- <a href="/espRestart"> -->
+          <button id="btnEspRestart" type="button" class="btn btn-danger btn-block">
+            <span class="icon-loop2"></span> Restart
+            <!-- </button> -->
+            </a>
+        </div>
+      </div>
+    </div>
+    <!-- END / tools -->
+
+        <!-- info -->
+        <div id="info" class="container tab-pane fade">
+          <br />
+          <div class="container card card-body bg-light mt-2 width-40">
+            <h2 class="text-center">Info</h2>
+            <hr />
+            <ul id="deviceInfoList" class="list-group"></ul>
+    
+          </div>
+        </div>
+        <!-- END / info -->
+
+  </div>  <!--  tab-content -->
+
+
+
+  <!-- MODAL -->
+
+  <div class="modal fade" id="modalWindow" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabel">Topology</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <table id="topology" class="table-striped border-success" data-click-to-select="false">
+            <thead class="thead-light">
+              <tr>
+                <!-- <th data-checkbox="false"></th> -->
+                <th data-field="deviceName" data-halign="center" data-align="left">
+                  <span class="text-success text-uppercase">Name Station</span>
+                </th>
+                <th data-field="mac" data-halign="center" data-align="center" data-class="text-uppercase">
+                  <span class="text-success text-uppercase">MAC Station</span>
+                </th>
+                <th data-field="gpioStatus" data-halign="center" data-align="center" data-click-to-select="false"
+                  data-formatter="gpioFormatter" data-events="gpioEvents">
+                  <span class="text-success text-uppercase">GPIO Status</span>
+                </th>
+                <th data-field="actions" data-halign="center" data-align="center" data-click-to-select="false"
+                  data-formatter="actionsFormatter" data-events="actionsEvents">
+                  <span class="text-success text-uppercase">Actions</span>
+                </th>
+              </tr>
+            </thead>
+          </table>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- END MODAL -->
+
+
+  <script src="js/unity.js"></script>
+
+  <!-- <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.min.js"></script>
+    <script src="js/bootstrap4-toggle.min.js"></script> -->
+
+  <script>
+
+    var $table = $('#topology')
+
+    function gpioFormatter(value, row, index) {
+
+      console.log("gpioFormatter")
+      console.log(value)
+      console.log(row)
+      console.log(index)
+
+      if (value == "" || value == null) return
+
+      let gpioStatus = value.split(" ")
+
+      let aux = []
+
+      for (let i = 0; i < gpioStatus.length; i++) {
+        aux.push('<div class="form-group form-check">',
+          '<input type="checkbox" class="form-check-input check"', gpioStatus[i] == 1 ? ' checked="checked"' : '', ' data-out="', (32 + i), '">',
+          '<label class="form-check-label">[OUT ', (i + 1), '] </label>',
+          '</div>')
+
+      }
+
+      return aux.join('')
+
+    }
+
+    window.gpioEvents = () => {
+      console.log("gpioEvents")
+
+      var gpioAction = {
+        'click .check': (e, value, row, index) => {
+          // console.log('You click gpio action, row: ' + JSON.stringify(row))
+          //let outData = [row.mac, e.currentTarget.dataset.out, e.currentTarget.checked]
+
+          let sendData = '{"mac":"'+ row.mac + '","gpio":' + e.currentTarget.dataset.out + ',"value":' + e.currentTarget.checked + '}'
+          console.log(sendData)  
+          //console.log(JSON.stringify(sendData));
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+              console.log(this.readyState)
+              console.log(this.responseText)
+            }
+
+          };
+          xhttp.open("POST", "/gpioAction", true);
+          //xhttp.send(JSON.stringify(sendData));
+          xhttp.send(sendData);
+
+        }
+      }
+
+      console.log(gpioAction)
+      return gpioAction
+    }
+
+    // window.gpioEvents = {
+
+
+
+    //         'click .check1': function (e, value, row, index) {
+    //           alert('You click restart action, row: ' + JSON.stringify(row))
+    //         },
+    //         'click .remove': function (e, value, row, index) {
+    //           $table.bootstrapTable('remove', {
+    //             field: 'mac',
+    //             values: [row.mac]
+    //           })
+    //         }
+    // };
+
+    function actionsFormatter(value, row, index) {
+      //console.log("formater")
+      return [
+        '<a class="restart" href="javascript:void(0)" title="Restart">',
+        '<span class="icon-loop2"></span>',
+        '</a>  ',
+        '<a class="remove" href="javascript:void(0)" title="Remove">',
+        '<span class="icon-bin2"></span>',
+        '</a>'
+      ].join('')
+    }
+
+    window.actionsEvents = {
+      'click .restart': function (e, value, row, index) {
+        alert('You click restart action, row: ' + JSON.stringify(row))
+      },
+      'click .remove': function (e, value, row, index) {
+        $table.bootstrapTable('remove', {
+          field: 'mac',
+          values: [row.mac]
+        })
+      }
+    };
+
+
+    // Disable form submissions if there are invalid fields
+    (function () {
+      "use strict";
+      window.addEventListener(
+        "load",
+        function () {
+          // Get the forms we want to add validation styles to
+          var forms = document.getElementsByClassName("needs-validation");
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function (
+            form
+          ) {
+            form.addEventListener(
+              "submit",
+              function (event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add("was-validated");
+              },
+              false
+            );
+          });
+        },
+        false
+      );
+    })();
+
+    setInterval(() => { deviceStatus() }, 60000);
+
+    const deviceStatus = () => {
+      console.log("deviceStatus")
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          const deviceInfo = JSON.parse(this.responseText);
+          const deviceInfoList = document.getElementById("deviceInfoList");
+          deviceInfoList.innerHTML = "";
+
+          $.each(deviceInfo, (key, val) => {
+  
+            let li = document.createElement("li")
+            li.className = "list-group-item list-group-item-action"
+            li.textContent = key
+            let span = document.createElement("span")
+            span.className = "float-right"
+            if(typeof val  === 'boolean'){
+              span.className += val == true ? " dot on" : " dot off" 
+            }else{
+              span.textContent = val
+            }
+            li.appendChild(span)
+            deviceInfoList.appendChild(li);
+          });
+
+        }
+
+      };
+      xhttp.open("GET", "/deviceStatus", true);
+      xhttp.send();
+    };//topology
+
+
+
+    $('#btnEspRestart').click(() => { espRestart(); })
+
+    const espRestart = () => {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          console.log(this.readyState);
+        }
+      };
+      xhttp.open("GET", "/espRestart", true);
+      xhttp.send();
+    };
+
+    /*
+        TOPOLOGy
+    */
+    $('#btnTopology').click(() => {
+      topology();
+      let tableRefresh = setInterval(() => { topology() }, 1000);
+      $('#modalWindow').on('hidden.bs.modal', () => {
+        clearInterval(tableRefresh)
+      })
+      $('#modalWindow').modal('show');
+    })
+
+    const topology = () => {
+      //console.log("topology");
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+
+          const topology = JSON.parse(this.responseText);
+          //console.log(topology);
+
+          $table.bootstrapTable('destroy');
+
+          $table.bootstrapTable({
+            data: topology
+          });
+
+          // if (!$('#modalWindow').hasClass('show')) {
+          //   $('#modalWindow').modal('show');
+          // }
+
+        }
+
+      };
+      xhttp.open("GET", "/topology", true);
+      xhttp.send();
+    };//topology
+
+    /*
+      carga el listtado de AP
+    */
+    const dropDown_APList = () => {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          console.log(this.responseText);
+          const apList = JSON.parse(this.responseText);
+          //console.log(apList);
+          const apListSelector = document.getElementById("apList");
+
+          apListSelector.innerHTML = "";
+          apList.forEach((ap) => {
+            // console.log(obj['ssid']);
+            let opt = document.createElement("option");
+            // create text node to add to option element (opt)
+            opt.appendChild(
+              document.createTextNode(
+                `${ap["ssid"]} [${ap["rssi"]}dB] [Ch:${ap["ch"]}]`
+              )
+            );
+            opt.value = ap["ssid"];
+            opt.dataset.rssi = ap["rssi"];
+            opt.dataset.ch = ap["ch"];
+            apListSelector.appendChild(opt);
+
+            // Object.entries(obj).forEach(([key, value]) => {
+            //     console.log(`${key} ${value}`);
+            // });
+          });
+
+          $(".selectpicker").selectpicker("refresh");
+
+          //Selecciona el valor de la configuracion
+          if("%AP_SSID%" != ""){
+            $(".selectpicker").selectpicker("val", "%AP_SSID%")
+            $('.selectpicker').selectpicker('refresh')
+          }
+
+
+        }
+      };
+      xhttp.open("GET", "/apList", true);
+      xhttp.send();
+    };
+
+    //Escanea los AP disponibles
+    // setTimeout(function ( ) {
+    //         dropDown_APList()
+    // }, 5000 ) ;
+
+    window.onload = () => {
+
+      $("ul.navbar-nav > li.nav-item > a.nav-link").on("click",  (event) => {
+          $("a.nav-link.active").removeClass("active")
+          $("li.nav-item.active").removeClass("active")
+          const clickedElement = $(event.target);
+          clickedElement.parent(".nav-item").addClass("active")
+        });
+
+      $(".nav-link.active").parent(".nav-item").addClass("active")
+
+
+      //Define la version de bootstrap utilizada
+      $.fn.selectpicker.Constructor.BootstrapVersion = "4";
+
+      //Dropdonw list event
+      $("#apList").on("changed.bs.select", function (e, clickedIndex, isSelected, previousValue) 
+      {
+        //console.log($('.selectpicker').selectpicker('val'));
+        let dataTypeAttribute = $("option:selected", this).attr("data-ch");
+        //console.log(dataTypeAttribute);
+        document.getElementById("channel").value = dataTypeAttribute;
+      });
+
+      //This event fires after the select has been initialized.
+      $("#apList").on("loaded.bs.select", function ( e, clickedIndex, isSelected, previousValue) 
+      {
+        dropDown_APList();
+      });
+
+      //Eventos de los interruptores
+      $("#wsSwitch").change(function () {
+        let status = this.checked;
+        let wsInputs = $(".ws-setup input"); //para recorrer los input dentro de la seccion
+        if (status) {
+          setTimeout(() => {
+            for (input of wsInputs) {
+              input.setAttribute("required", true);
+              input.removeAttribute("disabled");
+            }
+            $(".ws-setup").removeClass("hide");
+          }, 200);
+        } else {
+          setTimeout(() => {
+            for (input of wsInputs) {
+              input.removeAttribute("required");
+              input.setAttribute("disabled", true);
+            }
+            $(".ws-setup").addClass("hide");
+          }, 200);
+        }
+      });
+
+      $("#mqttSwitch").change(function () {
+        let mqttInputs = $(".mqtt-setup input");
+        let status = this.checked;
+        if (status) {
+          setTimeout(() => {
+            for (input of mqttInputs) {
+              input.setAttribute("required", true);
+              input.removeAttribute("disabled");
+            }
+            $(".mqtt-setup").removeClass("hide");
+          }, 200);
+        } else {
+          setTimeout(() => {
+            for (input of mqttInputs) {
+              input.removeAttribute("required");
+              input.setAttribute("disabled", true);
+            }
+            $(".mqtt-setup").addClass("hide");
+          }, 200);
+        }
+      });
+
+      //Actuliza el estado de los botones segun la confgiuracion del ESP
+      $("#wsSwitch").bootstrapToggle("%WS_STATUS%");
+      $("#mqttSwitch").bootstrapToggle("%MQTT_STATUS%");
+
+      deviceStatus()
+    };
+  </script>
+</body>
+
+</html>
